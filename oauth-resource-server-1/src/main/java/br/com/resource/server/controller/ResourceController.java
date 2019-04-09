@@ -7,19 +7,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ResourceController {
 
-	@GetMapping("/admins")
+	@GetMapping("/admins-1")
 	@PreAuthorize("hasAuthority('role_admin')")
 	public String contextAdmin() {
 		return "admin";
 	}
 
-	@GetMapping("/users")
+	@GetMapping("/users-1")
 	@PreAuthorize("hasAnyAuthority('role_admin','role_user')")
 	public String contextUser() {
 		return "user";
 	}
 
-	@GetMapping("/common")
+	@GetMapping("/common-1")
 	public String general() {
 		return "common api success";
 	}
