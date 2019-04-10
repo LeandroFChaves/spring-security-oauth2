@@ -1,0 +1,15 @@
+server:
+  port: 8084
+
+zuul:
+  sensitiveHeaders: Cookie,Set-Cookie
+  routes:
+    oauth:
+      path: /oauth/**
+      url: http://localhost:8081/oauth-server/oauth
+    api-1:
+      path: /api-1/**
+      url: http://localhost:8085/api-1
+    api-2:
+      path: /api-2/**
+      url: http://localhost:8083/api-2

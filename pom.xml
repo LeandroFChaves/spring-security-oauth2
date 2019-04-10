@@ -21,10 +21,12 @@
 	<properties>
 		<security-oauth2>2.3.5.RELEASE</security-oauth2>
 		<security-jwt>1.0.10.RELEASE</security-jwt>
+		<spring-zuul>2.1.1.RELEASE</spring-zuul>
 	</properties>
 
 	<modules>
 		<module>oauth-authorization-server</module>
+		<module>oauth-proxy</module>
 		<module>oauth-resource-server-1</module>
 		<module>oauth-resource-server-2</module>
 	</modules>
