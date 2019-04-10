@@ -1,6 +1,12 @@
 server:
   port: 8084
 
+security:
+  oauth2:
+    resource:
+      jwt:
+        key-value: teste
+        
 zuul:
   sensitiveHeaders: Cookie,Set-Cookie
   routes:
