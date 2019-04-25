@@ -5,7 +5,7 @@ import { AutenticacaoService } from '../autenticacao.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.sass']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 
@@ -24,11 +24,11 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  login() {
+  public loginAuthorizationCode() {
     window.location.href = 'http://localhost:8081/oauth-server/oauth/authorize?response_type=code&client_id=' + this._service.clientId + '&redirect_uri='+ this._service.redirectUri;
   }
 
-  logout() {
+  public logout() {
     this._service.logout();
   }
 
