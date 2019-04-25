@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -35,27 +36,45 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
 	@Autowired
 	private DataSource dataSource;
+	
+    @Override
+    public void configure(final AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
+        oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
+    }
 
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.jdbc(dataSource);
-
 		/*
-		clients.inMemory()
-					.withClient("angular")
-					.secret(passwordEncoder.encode("@ngul@r0"))
-					.scopes("read", "write")
-					.authorizedGrantTypes("password", "refresh_token")
-					.accessTokenValiditySeconds(1800)
-					.refreshTokenValiditySeconds(3600 * 24)
-				.and()
-					.withClient("mobile")
-					.secret(passwordEncoder.encode("m0b1l30"))
-					.scopes("read")
-					.authorizedGrantTypes("password", "refresh_token")
-					.accessTokenValiditySeconds(1800)
-					.refreshTokenValiditySeconds(3600 * 24);
-		*/
+        clients.inMemory()
+        .withClient("sampleClientId")
+        .authorizedGrantTypes("implicit")
+        .scopes("read", "write", "foo", "bar")
+        .autoApprove(false)
+        .accessTokenValiditySeconds(3600)
+        .redirectUris("http://localhost:8083/","http://localhost:8086/")
+        .and()
+        .withClient("fooClientIdPassword")
+        .secret(passwordEncoder.encode("secret"))
+        .authorizedGrantTypes("password", "authorization_code", "refresh_token", "client_credentials")
+        .autoApprove(true)
+        .scopes("foo", "read", "write")
+        .accessTokenValiditySeconds(3600)       // 1 hour
+        .refreshTokenValiditySeconds(2592000)  // 30 days
+        .redirectUris("http://www.example.com","http://localhost:4200/", "http://localhost:8089/","http://localhost:8080/login/oauth2/code/custom","http://localhost:8080/ui-thymeleaf/login/oauth2/code/custom", "http://localhost:8080/authorize/oauth2/code/bael", "http://localhost:8080/login/oauth2/code/bael")
+        .and()
+        .withClient("barClientIdPassword")
+        .secret(passwordEncoder.encode("secret"))
+        .authorizedGrantTypes("password", "authorization_code", "refresh_token")
+        .scopes("bar", "read", "write")
+        .accessTokenValiditySeconds(3600)       // 1 hour
+        .refreshTokenValiditySeconds(2592000)  // 30 days
+        .and()
+        .withClient("testImplicitClientId")
+        .authorizedGrantTypes("implicit")
+        .scopes("read", "write", "foo", "bar")
+        .autoApprove(true)
+        .redirectUris("http://www.example.com");*/
 	}
 
 	@Override

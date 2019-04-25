@@ -7,7 +7,7 @@ import { tap } from 'rxjs/operators';
 })
 export class HomeService {
 
-  private readonly API = 'api/common';
+  private readonly API = 'api/api-1/common-1';
 
   constructor(
     private http: HttpClient
