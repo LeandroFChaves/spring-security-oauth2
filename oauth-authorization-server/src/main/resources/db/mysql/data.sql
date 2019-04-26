@@ -1,13 +1,24 @@
 INSERT INTO OAUTH_CLIENT_DETAILS (CLIENT_ID, CLIENT_SECRET, RESOURCE_IDS, SCOPE, AUTHORIZED_GRANT_TYPES,
 								  WEB_SERVER_REDIRECT_URI, AUTHORITIES,	ACCESS_TOKEN_VALIDITY, REFRESH_TOKEN_VALIDITY,
 								  ADDITIONAL_INFORMATION, AUTOAPPROVE)
-	 VALUES ('client_app_1', '$2a$10$TtIk4lPC14Ve89wuJHHOzuFYNjMdePC3fKr61aVREbFVuht9.BWDC',
+	 VALUES ('client_app_1', '$2a$10$DDo8OaImrqM5zEKnWGkvyuqBduxLFIbuQ6U0whCJNksS8KQVzYiJS',
+			 'USER_CLIENT_RESOURCE, USER_ADMIN_RESOURCE',
+			 'foo, read, write',
+			 'authorization_code,refresh_token',
+			 'http://localhost:4200/', NULL,
+			 900, 3600,
+			 '{}', true);
+			 
+INSERT INTO OAUTH_CLIENT_DETAILS (CLIENT_ID, CLIENT_SECRET, RESOURCE_IDS, SCOPE, AUTHORIZED_GRANT_TYPES,
+								  WEB_SERVER_REDIRECT_URI, AUTHORITIES,	ACCESS_TOKEN_VALIDITY, REFRESH_TOKEN_VALIDITY,
+								  ADDITIONAL_INFORMATION, AUTOAPPROVE)
+	 VALUES ('client_app_2', '$2a$10$h8peZKrY/qC8/9f4K8E7L.sxB/0MttQ1allHCAeygtHVV4MsudzZi',
 			 'USER_CLIENT_RESOURCE, USER_ADMIN_RESOURCE',
 			 'role_admin,role_user',
-			 'authorization_code,password,refresh_token,implicit',
+			 'password,refresh_token',
 			 NULL, NULL,
 			 900, 3600,
-			 '{}', NULL);
+			 '{}', true);
 
 INSERT INTO USER (USERNAME, PASSWORD, EMAIL, ENABLED, ACCOUNT_EXPIRED, CREDENTIALS_EXPIRED, ACCOUNT_LOCKED)
      VALUES ('admin', '$2a$10$DPcqbUNdHkymIxM0oG1/oOmV8Zi.GqdCdnpM3/hmHqY8SGqMxb/6u', 'admin@padrao.com.br', 1, 0, 0, 0);

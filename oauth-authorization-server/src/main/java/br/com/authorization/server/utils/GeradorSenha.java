@@ -11,6 +11,7 @@ public class GeradorSenha {
 		System.out.println("Senha usuário user: " + encoder.encode("user"));
 		
 		System.out.println("Senha client_app_1: " + encoder.encode("client_app_1"));
+		System.out.println("Senha client_app_2: " + encoder.encode("client_app_2"));
 		
 	}
 
