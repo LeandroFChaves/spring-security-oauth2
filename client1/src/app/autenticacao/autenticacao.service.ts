@@ -9,7 +9,7 @@ import { catchError } from 'rxjs/operators';
 })
 export class AutenticacaoService {
   
-  public clientId = 'fooClientId';
+  public clientId = 'client_app_1';
   public redirectUri = 'http://localhost:4200/';
 
  constructor(
@@ -20,14 +20,17 @@ export class AutenticacaoService {
    params.append('grant_type','authorization_code');
    params.append('client_id', this.clientId);
    params.append('redirect_uri', this.redirectUri);
-   params.append('code',code);
+   params.append('code', code);
 
-   let headers = new HttpHeaders({'Content-type': 'application/x-www-form-urlencoded; charset=utf-8', 'Authorization': 'Basic '+btoa(this.clientId+":secret")});
+   const headers = new HttpHeaders()
+   .append('Content-Type',  'application/x-www-form-urlencoded; charset=utf-8')
+   .append('Authorization', 'Basic ' + btoa("client_app_1" + ':' + "client_app_1"));
+
     this._http.post('http://localhost:8081/oauth-server/oauth/token', params.toString(), { headers: headers })
-   .subscribe(
-     data => this.saveToken(data),
-     err => alert('Invalid Credentials')
-   ); 
+    .subscribe(
+      data => this.saveToken(data),
+      err => alert('Invalid Credentials')
+    ); 
  }
 
  saveToken(token){
