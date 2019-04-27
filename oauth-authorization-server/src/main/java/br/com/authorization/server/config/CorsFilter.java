@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CorsFilter implements Filter {
 
-	private final List<String> allowedOrigins = Arrays.asList("http://localhost:4200");
+	private final List<String> allowedOrigins = Arrays.asList("http://localhost:4200", "http://localhost:4201", "http://localhost:4202");
 	
 	@Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {

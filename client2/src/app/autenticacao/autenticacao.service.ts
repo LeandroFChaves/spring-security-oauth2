@@ -38,5 +38,9 @@ export class AutenticacaoService {
 
     this._router.navigate(['/home']);
   }
+
+  public checkCredentials(){
+    return Cookie.check('access_token');
+  } 
  
 }
