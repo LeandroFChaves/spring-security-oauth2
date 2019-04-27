@@ -26,7 +26,7 @@ export class AutenticacaoService {
    .append('Content-Type',  'application/x-www-form-urlencoded; charset=utf-8')
    .append('Authorization', 'Basic ' + btoa("client_app_1" + ':' + "client_app_1"));
 
-    this._http.post('http://localhost:8081/oauth-server/oauth/token', params.toString(), { headers: headers })
+    this._http.post('api/oauth/token', params.toString(), { headers: headers })
     .subscribe(
       data => this.saveToken(data),
       err => alert('Invalid Credentials')

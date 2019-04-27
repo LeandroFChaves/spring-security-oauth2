@@ -1,5 +1,5 @@
 server:
-  port: 8084
+  port: 8083
 
 security:
   oauth2:
@@ -12,10 +12,11 @@ zuul:
   routes:
     oauth:
       path: /oauth/**
-      url: http://localhost:8081/oauth-server/oauth
+      sensitiveHeaders: 
+      url: http://localhost:8080/oauth-server/oauth
     api-1:
       path: /api-1/**
-      url: http://localhost:8085/api-1
+      url: http://localhost:8081/api-1
     api-2:
       path: /api-2/**
-      url: http://localhost:8083/api-2
+      url: http://localhost:8082/api-2

@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   }
 
   public loginAuthorizationCode() {
-    window.location.href = 'http://localhost:8081/oauth-server/oauth/authorize?response_type=code&client_id=' + this._service.clientId + '&redirect_uri='+ this._service.redirectUri;
+    window.location.href = 'api/oauth/authorize?response_type=code&client_id=' + this._service.clientId + '&redirect_uri='+ this._service.redirectUri;
   }
 
   public logout() {
