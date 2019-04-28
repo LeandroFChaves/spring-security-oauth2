@@ -2,7 +2,10 @@ server:
   port: 8080
   servlet:
     context-path: /oauth-server
-      
+  error:
+    whitelabel:
+      enabled: false
+
 spring:
     datasource:
         hikari:

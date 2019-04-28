@@ -1,0 +1,33 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+	<title>Erro - OAuth2</title>
+</head>
+<body>
+	<div class="container">
+		<div class="jumbotron" >
+			<h1 class="text-center">
+				<i class="far fa-frown"></i>
+				Desculpe, algo deu errado!
+			</h1>
+			
+			<h2 class="text-center">Estamos consertando isso.</h2>
+			
+			<p class="text-center">
+				<a class="btn btn-primary" href="javascript:history.back();">
+					<i class="fas fa-home"></i> Voltar
+				</a>
+			</p>
+			
+			<div class="alert alert-danger" role="alert">
+				<p th:text="${ 'Status: ' + status }" />
+  				<p th:text="${ 'Timestamp: ' + timestamp }" />
+      			<p th:text="${ 'Exception: ' + exception }" />
+      			<p th:text="${ 'Details: ' + message }" />
+			</div>
+		</div>
+	</div>
+</body>
+</html>
