@@ -11,6 +11,8 @@ public class LoginConfigurer implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/login").setViewName("login");
+        registry.addViewController("/oauth/confirm_access").setViewName("authorize");
+        
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
     }
 
