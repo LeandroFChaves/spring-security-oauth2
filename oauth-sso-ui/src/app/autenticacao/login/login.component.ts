@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AutenticacaoService } from '../autenticacao.service';
 
@@ -11,16 +12,14 @@ export class LoginComponent implements OnInit {
 
   public isLoggedIn = false;
 
-  constructor(private _service : AutenticacaoService) {
-
-  }
+  constructor(private _service : AutenticacaoService) { }
 
   ngOnInit() {
     this.isLoggedIn = this._service.checkCredentials();    
     let i = window.location.href.indexOf('code');
 
-    if(!this.isLoggedIn && i != -1){
-        this._service.retrieveToken(window.location.href.substring(i + 5));
+    if (!this.isLoggedIn && i != -1){
+      this._service.retrieveToken(window.location.href.substring(i + 5));
     }
   }
 
