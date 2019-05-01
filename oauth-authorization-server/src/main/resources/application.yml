@@ -7,6 +7,8 @@ server:
       enabled: false
 
 spring:
+    application:
+      name: oauth-server
     datasource:
         hikari:
             connection-test-query: SELECT 1 FROM DUAL
@@ -20,4 +22,13 @@ spring:
     jpa:
       hibernate:
         ddl-auto: update
-      database: mysql      
+      database: mysql  
+      
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8084/eureka/
+    fetch-registry: true
+    register-with-eureka: true    

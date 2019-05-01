@@ -36,5 +36,11 @@
 			<artifactId>spring-security-jwt</artifactId>
 			<version>${security-jwt}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+			<version>${spring-eureka}</version>
+		</dependency>
 	</dependencies>
 </project>
