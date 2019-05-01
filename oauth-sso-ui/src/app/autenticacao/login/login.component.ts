@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 import { AutenticacaoService } from '../autenticacao.service';
 
@@ -17,9 +17,13 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.isLoggedIn = this._service.checkCredentials();    
     let i = window.location.href.indexOf('code');
-
+    
     if (!this.isLoggedIn && i != -1){
       this._service.retrieveToken(window.location.href.substring(i + 5));
+    }
+
+    if ( (!this.isLoggedIn && i == -1) && (!environment.pre_login) ) {
+      this.loginAuthorizationCode();
     }
   }
 
