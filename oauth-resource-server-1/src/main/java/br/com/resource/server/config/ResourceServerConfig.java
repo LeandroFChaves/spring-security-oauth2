@@ -1,21 +1,16 @@
 package br.com.resource.server.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.expression.OAuth2MethodSecurityExpressionHandler;
-import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
-import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 
 @Configuration
 @EnableResourceServer
@@ -23,10 +18,16 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 	private static final String RESOURCE_ID = "USER_CLIENT_RESOURCE";
-
-	@Autowired
-	private CustomAccessTokenConverter customAccessTokenConverter;
-
+	
+	@Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}")
+	private String urlCheckToken;
+	
+	@Value("${spring.security.oauth2.resourceserver.client-id}")
+	private String clientId;
+	
+	@Value("${spring.security.oauth2.resourceserver.client-secret}")
+	private String clientSecret;
+	
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		// @formatter:off
@@ -43,31 +44,15 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		resources.resourceId(RESOURCE_ID).tokenServices(tokenServices()).stateless(true);
 	}
 
-	@Bean
-	public MethodSecurityExpressionHandler createExpressionHandler() {
-		return new OAuth2MethodSecurityExpressionHandler();
-	}
-
-	@Bean
-	public TokenStore tokenStore() {
-		return new JwtTokenStore(accessTokenConverter());
-	}
-
-	@Bean
-	public JwtAccessTokenConverter accessTokenConverter() {
-		final JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-		converter.setAccessTokenConverter(customAccessTokenConverter);
-
-		converter.setSigningKey("teste");
-
-		return converter;
-	}
-
-	@Bean
 	@Primary
-	public DefaultTokenServices tokenServices() {
-		final DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
-		defaultTokenServices.setTokenStore(tokenStore());
-		return defaultTokenServices;
-	}
+    @Bean
+    public RemoteTokenServices tokenServices() {
+        final RemoteTokenServices tokenService = new RemoteTokenServices();
+        
+        tokenService.setCheckTokenEndpointUrl(urlCheckToken);
+        tokenService.setClientId(clientId);
+        tokenService.setClientSecret(clientSecret);
+        
+        return tokenService;
+    }
 }

@@ -7,6 +7,14 @@ spring:
   application:
     name: api-1
     
+  security:
+    oauth2:
+      resourceserver:
+        client-id: client_app_1
+        client-secret: client_app_1
+        jwt:
+          jwk-set-uri: http://localhost:8080/oauth-server/oauth/check_token
+    
 eureka:
   instance:
     prefer-ip-address: true
