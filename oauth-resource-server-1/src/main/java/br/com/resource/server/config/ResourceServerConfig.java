@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -27,15 +28,28 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	
 	@Value("${spring.security.oauth2.resourceserver.client-secret}")
 	private String clientSecret;
-	
+
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		// @formatter:off
-		http.authorizeRequests().antMatchers("/common").permitAll()
-								.anyRequest().authenticated().and()
-								.sessionManagement()
-								.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-								.csrf().disable();
+		http
+			.authorizeRequests()
+				.antMatchers("/").permitAll()
+				.antMatchers("/usuario-logado-1").hasRole("ADMIN")
+				.antMatchers("/admins-1").hasRole("ADMIN")
+			.and()
+			.authorizeRequests()
+				.antMatchers(HttpMethod.GET,"/**").access("#oauth2.hasScope('read')")
+				.antMatchers(HttpMethod.POST,"/**").access("#oauth2.hasScope('write')")
+				.antMatchers(HttpMethod.PUT,"/**").access("#oauth2.hasScope('write')")
+				.antMatchers(HttpMethod.PATCH,"/**").access("#oauth2.hasScope('write')")
+				.antMatchers(HttpMethod.DELETE,"/**").access("#oauth2.hasScope('delete')")
+		 	.anyRequest()
+		 	.authenticated()
+		 	.and()
+		 	.sessionManagement()
+		 	.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+		 	.csrf().disable();
 		// @formatter:on
 	}
 
@@ -44,7 +58,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		resources.resourceId(RESOURCE_ID).tokenServices(tokenServices()).stateless(true);
 	}
 
-	@Primary
+    @Primary
     @Bean
     public RemoteTokenServices tokenServices() {
         final RemoteTokenServices tokenService = new RemoteTokenServices();
