@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: api-1
+    
+  cloud:
+    config:
+      uri: http://localhost:8085/config-server

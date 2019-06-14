@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: oauth-server
+    
+  cloud:
+    config:
+      uri: http://localhost:8085/config-server
