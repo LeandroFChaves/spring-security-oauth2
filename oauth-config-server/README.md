@@ -1,0 +1,1 @@
+http://localhost:8085/config-server/exemplo-config/default

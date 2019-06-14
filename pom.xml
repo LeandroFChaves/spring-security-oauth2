@@ -24,11 +24,13 @@
 		<security-jwt>1.0.10.RELEASE</security-jwt>
 		<spring-zuul>2.1.1.RELEASE</spring-zuul>
 		<spring-eureka>2.1.1.RELEASE</spring-eureka>
+		<spring-config-server>2.1.2.RELEASE</spring-config-server>
 	</properties>
 
 	<modules>
 		<module>oauth-discovery</module>
 		<module>oauth-gateway</module>
+		<module>oauth-config-server</module>
 		<module>oauth-authorization-server</module>
 		<module>oauth-resource-server-1</module>
 		<module>oauth-resource-server-2</module>
