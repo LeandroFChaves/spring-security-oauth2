@@ -1,4 +1,4 @@
-package br.com.proxy.config;
+package br.com.gateway.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -8,7 +8,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 
 @Configuration
 @EnableResourceServer
-public class ProxyConfiguration extends ResourceServerConfigurerAdapter {
+public class GatewayConfiguration extends ResourceServerConfigurerAdapter {
 
 	private static final String RESOURCE_ID = "USER_CLIENT_RESOURCE";
 

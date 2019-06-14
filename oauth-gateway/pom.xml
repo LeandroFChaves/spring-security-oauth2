@@ -4,8 +4,8 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>oauth-proxy</artifactId>
-	<name>oauth-proxy</name>
+	<artifactId>oauth-gateway</artifactId>
+	<name>oauth-gateway</name>
 	<packaging>war</packaging>
 
 	<parent>

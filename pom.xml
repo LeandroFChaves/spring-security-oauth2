@@ -28,7 +28,7 @@
 
 	<modules>
 		<module>oauth-discovery</module>
-		<module>oauth-proxy</module>
+		<module>oauth-gateway</module>
 		<module>oauth-authorization-server</module>
 		<module>oauth-resource-server-1</module>
 		<module>oauth-resource-server-2</module>
