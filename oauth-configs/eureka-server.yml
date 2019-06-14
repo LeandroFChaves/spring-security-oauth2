@@ -1,0 +1,22 @@
+server:
+  port: 8084
+
+eureka:
+  instance:
+    # Host onde o será iniciado o servidor do Eureka
+    hostname: localhost
+    
+  client:
+    # Mesmo sendo um Servidor do Eureka, essa aplicação não deixa de ser um Microservice como os outros, portanto ele deve se auto registrar no eureka
+    register-with-eureka: true
+    
+    # Os clientes do Eureka obtêm as informações de registro do servidor e as armazenam no local. Depois disso, os clientes usam essa informação para encontrar outros serviços. Como essa aplicação é o próprio Servidor do Eureka, desabilitamos esta busca
+    fetch-registry: false
+    
+    # Localização do Eureka Server, já que essa aplicação vai se auto registrar
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+  # Tempo em milissegundos que o Eureka Server irá esperar entre as sincronizações com os clientes
+  server:
+    wait-time-in-ms-when-sync-empty: 30000
