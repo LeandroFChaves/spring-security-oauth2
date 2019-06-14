@@ -1,0 +1,35 @@
+server:
+  port: 8083
+  servlet:
+    context-path: /gateway
+
+security:
+  oauth2:
+    resource:
+      jwt:
+        key-value: teste
+    
+zuul:
+  sensitiveHeaders: Cookie,Set-Cookie
+  routes:
+    oauth:
+      path: /oauth/**
+      sensitiveHeaders: 
+      url: http://localhost:8080/oauth-server/oauth
+    api-1:
+      path: /api-1/**
+      url: http://localhost:8081/api-1
+    api-2:
+      path: /api-2/**
+      url: http://localhost:8082/api-2
+      
+eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: localhost
+    port: 8084
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/    

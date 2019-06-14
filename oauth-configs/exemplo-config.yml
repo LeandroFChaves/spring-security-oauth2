@@ -1,4 +1,8 @@
 delivery:
-  maxOrders: 10
-  minOrders: 1
-  exemplo: config-server
+  oauth-config-server: oauth-config-server
+  oauth-discovery: oauth-discovery
+  oauth-gateway: oauth-gateway
+  oauth-server: oauth-server
+  api-1: api-1
+  api-2: api-2
+  oauth-configs: oauth-configs

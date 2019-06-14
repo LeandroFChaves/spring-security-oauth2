@@ -1,0 +1,24 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /api-1
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        client-id: client_app_1
+        client-secret: client_app_1
+        jwt:
+          jwk-set-uri: http://localhost:8080/oauth-server/oauth/check_token
+    
+eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: localhost
+    port: 8084
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
